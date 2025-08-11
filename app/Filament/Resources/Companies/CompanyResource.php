@@ -16,19 +16,6 @@ use Filament\Tables\Table;
 
 class CompanyResource extends Resource
 {
-    protected static ?string $model = Company::class;
-
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice;
-
-    protected static ?string $navigationLabel = 'Empresas';
-
-    protected static ?string $pluralLabel = 'Empresas';
-
-    protected static ?string $label = 'Empresas';
-
-    protected static ?string $slug = 'empresas';
-
-    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {
@@ -55,4 +42,18 @@ class CompanyResource extends Resource
             'edit' => EditCompany::route('/{record}/editar'),
         ];
     }
+
+    protected static ?string $model = Company::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice;
+
+    protected static ?string $navigationLabel = 'Empresas';
+
+    protected static ?string $pluralLabel = 'Empresas';
+
+    protected static ?string $label = 'Empresas';
+
+    protected static ?string $slug = 'empresas';
+
+    protected static ?string $recordTitleAttribute = 'name';
 }
