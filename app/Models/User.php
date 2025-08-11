@@ -3,7 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -21,6 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar_path',
+        'is_active',
     ];
 
     /**
@@ -45,4 +50,25 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+//    public function canAccessFilament(): bool
+//    {
+//        return $this->hasRole('Admin');
+//    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+
+    public function hasRole(string $role): bool
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
+
+//    public function canAccessPanel(Panel $panel): bool
+//    {
+//        return $this->hasRole('Admin');
+//    }
 }
