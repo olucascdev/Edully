@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Models\Role;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -34,8 +35,7 @@ class UserForm
                     ->label('Funções')
                     ->multiple()
                     ->relationship('roles', 'name')
-                    ->preload()
-                    ->required(fn (string $context): bool => $context === 'create'),
+                    ->preload(),
 
             ]);
     }

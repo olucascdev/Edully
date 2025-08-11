@@ -27,10 +27,10 @@ class UsersTable
                     ->sortable(),
                 TextColumn::make('roles.name')
                     ->label('Função')
-                    ->searchable()
-                    ->sortable()
                     ->badge()
-                    ->formatStateUsing(fn ($state) => $state ?? 'Nenhuma função atribuída'),
+                    ->formatStateUsing(fn ($state) => $state ?: 'Nenhuma função atribuída')
+                    ->sortable()
+                    ->searchable(),
                 ToggleColumn::make('is_active')
                     ->label('Ativo')
                     ->sortable(),

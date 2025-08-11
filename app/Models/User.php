@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -51,24 +52,11 @@ class User extends Authenticatable
         ];
     }
 
-//    public function canAccessFilament(): bool
-//    {
-//        return $this->hasRole('Admin');
-//    }
 
-    public function roles(): BelongsToMany
+
+
+    public function canAccessPanel(Panel $panel): bool
     {
-        return $this->belongsToMany(Role::class);
+        return $this->hasPermissionTo('acess_admin');
     }
-
-
-    public function hasRole(string $role): bool
-    {
-        return $this->roles()->where('name', $role)->exists();
-    }
-
-//    public function canAccessPanel(Panel $panel): bool
-//    {
-//        return $this->hasRole('Admin');
-//    }
 }
