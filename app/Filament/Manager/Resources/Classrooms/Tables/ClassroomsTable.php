@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Manager\Resources\Subjects\Tables;
+namespace App\Filament\Manager\Resources\Classrooms\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -9,7 +9,7 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SubjectsTable
+class ClassroomsTable
 {
     public static function configure(Table $table): Table
     {
@@ -17,10 +17,15 @@ class SubjectsTable
             ->columns([
                 TextColumn::make('id')
                     ->label('#')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('name')
-                    ->label('Nome')
-                    ->searchable(),
+                    ->searchable()
+                    ->label('Nome'),
+                TextColumn::make('capacity')
+                    ->numeric()
+                    ->label('Capacidade')
+                    ->sortable(),
             ])
             ->filters([
                 //
