@@ -16,11 +16,6 @@ use Filament\Tables\Table;
 
 class StudentResource extends Resource
 {
-    protected static ?string $model = Student::class;
-
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
-    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {
@@ -43,8 +38,22 @@ class StudentResource extends Resource
     {
         return [
             'index' => ListStudents::route('/'),
-            'create' => CreateStudent::route('/create'),
-            'edit' => EditStudent::route('/{record}/edit'),
+            'create' => CreateStudent::route('/criar'),
+            'edit' => EditStudent::route('/{record}/editar'),
         ];
     }
+
+    protected static ?string $model = Student::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAcademicCap;
+
+    protected static ?string $navigationLabel = 'Estudantes';
+
+    protected static ?string $pluralLabel = 'Estudantes';
+
+    protected static ?string $label = 'Estudantes';
+
+    protected static ?string $slug = 'estudantes';
+
+    protected static ?string $recordTitleAttribute = 'name';
 }
