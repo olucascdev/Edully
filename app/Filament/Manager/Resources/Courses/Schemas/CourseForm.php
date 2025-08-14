@@ -17,11 +17,6 @@ class CourseForm
                     ->label('Nome')
                     ->required()
                     ->maxLength(255),
-                Select::make('turn')
-                    ->label('Turno')
-                    ->options(Turn::class)
-                    ->required()
-                    ->default(Turn::Morning->value),
                 TextInput::make('description')
                     ->label('Descrição')
                     ->maxLength(1000)

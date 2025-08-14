@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Classroom;
+use App\Models\Course;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,10 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('class_groups', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Course::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Classroom::class)->nullable()->constrained()->nullOnDelete();
             $table->string('name');
-            $table->text('description')->nullable();
+            $table->string('turn');
+            $table->year('school_year');
             $table->timestamps();
         });
     }
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('class_groups');
     }
 };
